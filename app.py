@@ -4,7 +4,7 @@ import numpy as np
 from tensorflow.keras.models import model_from_json
 from tensorflow.keras.preprocessing.image import img_to_array
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 # Load the pre-trained model
 model = model_from_json(open(
@@ -17,8 +17,6 @@ face_cascade = cv2.CascadeClassifier(
     'C:\\Users\\Divya\\OneDrive\\Documents\\FRONTEND\\haarcascade_frontalface_default1.xml')
 
 # Function to perform emotion detection on a given frame
-
-
 def detect_emotion(frame):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(
@@ -45,8 +43,6 @@ def detect_emotion(frame):
     return frame
 
 # Function to generate video feed
-
-
 def generate():
     video_capture = cv2.VideoCapture(0)
 
@@ -71,19 +67,14 @@ def generate():
     video_capture.release()
 
 # Flask route for rendering the web page
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
 
 # Flask route for video feed
-
-
 @app.route('/video_feed')
 def video_feed():
     return Response(generate(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-
-if __name__ == '__main__':
+if _name_ == '_main_':
     app.run(host='0.0.0.0', port=8000, debug=True)
